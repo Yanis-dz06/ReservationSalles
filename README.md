@@ -37,3 +37,17 @@ Application .NET MAUI de réservation de salles.
 ## Projet
 
 Projet réalisé dans le cadre du cours de programmation.
+
+## Captures d'écran
+
+### Tableau de bord
+
+![Tableau de bord](Images/dashboard.png)
+
+### Liste des salles
+
+![Liste des salles](Images/salles.png)
+
+### Détail d'une salle
+
+![Détail de la salle](Images/salle-detail.png)
