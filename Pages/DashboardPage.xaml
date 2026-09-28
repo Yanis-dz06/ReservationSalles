@@ -1,0 +1,107 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReservationSalles.Pages.DashboardPage"
+             Title="Tableau de bord"
+             BackgroundColor="White">
+
+    <Grid Padding="30">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- Partie haute -->
+        <VerticalStackLayout Grid.Row="0"
+                             Spacing="10">
+
+            <Label Text="Réservation de salles"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   TextColor="#1976D2"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="Bienvenue dans votre espace de réservation"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+
+
+        <!-- Cartes statistiques au centre -->
+        <HorizontalStackLayout Grid.Row="1"
+                               Spacing="30"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">
+
+
+            <!-- Carte salles disponibles -->
+            <Frame WidthRequest="220"
+                   HeightRequest="150"
+                   BackgroundColor="#E3F2FD"
+                   CornerRadius="20"
+                   Padding="20">
+
+                <VerticalStackLayout>
+
+                    <Label Text="Salles disponibles"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#1976D2"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="10"
+                           FontSize="45"
+                           TextColor="#1976D2"
+                           HorizontalOptions="Center"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+
+            <!-- Carte réservations -->
+            <Frame WidthRequest="220"
+                   HeightRequest="150"
+                   BackgroundColor="#E3F2FD"
+                   CornerRadius="20"
+                   Padding="20">
+
+                <VerticalStackLayout>
+
+                    <Label Text="Réservations simulées"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#1976D2"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="3"
+                           FontSize="45"
+                           TextColor="#1976D2"
+                           HorizontalOptions="Center"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+        </HorizontalStackLayout>
+
+
+        <!-- Bouton en bas -->
+        <Button Grid.Row="2"
+                Text="Voir les salles"
+                HeightRequest="60"
+                BackgroundColor="#1976D2"
+                TextColor="White"
+                FontSize="20"
+                CornerRadius="20"
+                Margin="0,20,0,0"
+                Clicked="OnVoirLesSallesClicked"/>
+
+    </Grid>
+
+</ContentPage>

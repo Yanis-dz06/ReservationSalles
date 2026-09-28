@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReservationSalles.Pages.SalleDetailPage"
+             Title="Détail de la salle"
+             BackgroundColor="White">
+
+    <ScrollView>
+
+        <VerticalStackLayout Padding="30"
+                             Spacing="20">
+
+            <!-- Titre -->
+            <Label Text="Détail de la salle"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="#1976D2"
+                   HorizontalOptions="Center"/>
+
+
+            <!-- Nom de la salle -->
+            <Label Text="{Binding Nom}"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#1976D2"
+                   HorizontalOptions="Center"/>
+
+
+            <!-- Informations -->
+            <Frame BackgroundColor="#E3F2FD"
+                   CornerRadius="20"
+                   Padding="25">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="{Binding Capacite, StringFormat='Capacité : {0} personnes'}"
+                           FontSize="18"
+                           TextColor="Black"/>
+
+                    <Label Text="{Binding Localisation, StringFormat='Localisation : {0}'}"
+                           FontSize="18"
+                           TextColor="Black"/>
+
+                    <Label Text="{Binding Statut, StringFormat='Disponibilité : {0}'}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{Binding StatutCouleur}"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+
+            <!-- Équipements -->
+            <Label Text="Équipements"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="#1976D2"/>
+
+
+            <Frame BackgroundColor="#F5F5F5"
+                   CornerRadius="15"
+                   Padding="20">
+
+                <CollectionView ItemsSource="{Binding Equipements}"
+                                SelectionMode="None">
+
+                    <CollectionView.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <Label Text="{Binding StringFormat='• {0}'}"
+                                   FontSize="17"
+                                   TextColor="Black"
+                                   Margin="0,5"/>
+
+                        </DataTemplate>
+
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </Frame>
+
+
+            <!-- Bouton réserver -->
+            <Button Text="Réserver"
+                    HeightRequest="60"
+                    BackgroundColor="#1976D2"
+                    TextColor="White"
+                    FontSize="20"
+                    CornerRadius="20"/>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
