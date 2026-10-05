@@ -11,10 +11,7 @@
 
         <!-- Titre -->
         <Label Text="Salles disponibles"
-               FontSize="30"
-               FontAttributes="Bold"
-               TextColor="#1976D2"
-               HorizontalOptions="Center"/>
+               Style="{StaticResource TitrePage}"/>
 
 
         <!-- Liste des salles -->
@@ -24,10 +21,8 @@
 
                 <DataTemplate>
 
-                    <Frame BackgroundColor="#E3F2FD"
-                           CornerRadius="15"
-                           Padding="15"
-                           Margin="0,5">
+                    <!-- Carte de la salle -->
+                    <Border Style="{StaticResource CarteSalle}">
 
                         <Grid ColumnDefinitions="80,*,Auto"
                               ColumnSpacing="15">
@@ -43,18 +38,17 @@
                             <VerticalStackLayout Grid.Column="1"
                                                  Spacing="5">
 
+                                <!-- Nom -->
                                 <Label Text="{Binding Nom}"
-                                       FontSize="20"
-                                       FontAttributes="Bold"
-                                       TextColor="#1976D2"/>
+                                       Style="{StaticResource TexteCarte}"/>
 
+                                <!-- Capacité -->
                                 <Label Text="{Binding Capacite, StringFormat='Capacité : {0} personnes'}"
-                                       FontSize="15"
-                                       TextColor="Black"/>
+                                       Style="{StaticResource TexteSecondaire}"/>
 
+                                <!-- Localisation -->
                                 <Label Text="{Binding Localisation, StringFormat='Localisation : {0}'}"
-                                       FontSize="15"
-                                       TextColor="Black"/>
+                                       Style="{StaticResource TexteSecondaire}"/>
 
                                 <!-- Disponibilité -->
                                 <Label Text="{Binding Statut, StringFormat='Disponibilité : {0}'}"
@@ -68,15 +62,13 @@
                             <!-- Bouton Voir -->
                             <Button Grid.Column="2"
                                     Text="Voir"
-                                    BackgroundColor="#1976D2"
-                                    TextColor="White"
-                                    CornerRadius="10"
+                                    Style="{StaticResource BoutonPrincipal}"
                                     VerticalOptions="Center"
                                     Clicked="OnVoirClicked"/>
 
                         </Grid>
 
-                    </Frame>
+                    </Border>
 
                 </DataTemplate>
 

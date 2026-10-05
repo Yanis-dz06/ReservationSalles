@@ -17,17 +17,13 @@
         <VerticalStackLayout Grid.Row="0"
                              Spacing="10">
 
+            <!-- Titre -->
             <Label Text="Réservation de salles"
-                   FontSize="32"
-                   FontAttributes="Bold"
-                   TextColor="#1976D2"
-                   HorizontalOptions="Center"/>
+                   Style="{StaticResource TitrePage}"/>
 
+            <!-- Sous-titre -->
             <Label Text="Bienvenue dans votre espace de réservation"
-                   FontSize="20"
-                   FontAttributes="Bold"
-                   TextColor="Black"
-                   HorizontalOptions="Center"/>
+                   Style="{StaticResource SousTitre}"/>
 
         </VerticalStackLayout>
 
@@ -94,9 +90,8 @@
         <!-- Bouton en bas -->
         <Button Grid.Row="2"
                 Text="Voir les salles"
+                Style="{StaticResource BoutonPrincipal}"
                 HeightRequest="60"
-                BackgroundColor="#1976D2"
-                TextColor="White"
                 FontSize="20"
                 CornerRadius="20"
                 Margin="0,20,0,0"

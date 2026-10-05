@@ -78,7 +78,12 @@ public partial class SallesPage : ContentPage
         if (sender is Button button &&
             button.BindingContext is Salle salle)
         {
-            await Navigation.PushAsync(new SalleDetailPage(salle));
+            await Shell.Current.GoToAsync(
+                nameof(SalleDetailPage),
+                new Dictionary<string, object>
+                {
+                    ["Salle"] = salle
+                });
         }
     }
 }
