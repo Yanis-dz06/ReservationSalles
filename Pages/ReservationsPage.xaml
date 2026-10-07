@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReservationSalles.Pages.ReservationsPage"
+             Title="Mes réservations"
+             BackgroundColor="White">
+
+    <VerticalStackLayout Padding="30"
+                         Spacing="20">
+
+        <!-- Titre -->
+        <Label Text="Mes réservations"
+               FontSize="30"
+               FontAttributes="Bold"
+               TextColor="#1976D2"
+               HorizontalOptions="Center"/>
+
+        <!-- Liste des réservations -->
+        <CollectionView x:Name="ReservationsCollectionView"
+                        SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <Border BackgroundColor="#E3F2FD"
+                            StrokeShape="RoundRectangle 20"
+                            Padding="20"
+                            Margin="0,5">
+
+                        <VerticalStackLayout Spacing="8">
+
+                            <Label Text="{Binding NomSalle}"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#1976D2"/>
+
+                            <Label Text="{Binding NomUtilisateur, StringFormat='Nom : {0}'}"
+                                   FontSize="17"
+                                   TextColor="Black"/>
+
+                            <Label Text="{Binding Date, StringFormat='Date : {0:dd/MM/yyyy}'}"
+                                   FontSize="17"
+                                   TextColor="Black"/>
+
+                            <Label Text="{Binding PlageHoraire, StringFormat='Plage horaire : {0}'}"
+                                   FontSize="17"
+                                   TextColor="Black"/>
+
+                        </VerticalStackLayout>
+
+                    </Border>
+
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>

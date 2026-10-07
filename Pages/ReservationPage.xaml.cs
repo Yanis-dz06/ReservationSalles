@@ -1,3 +1,5 @@
+using ReservationSalles.Models;
+
 namespace ReservationSalles.Pages;
 
 public partial class ReservationPage : ContentPage
@@ -24,6 +26,7 @@ public partial class ReservationPage : ContentPage
     {
         string nom = NomUtilisateur.Text?.Trim() ?? "";
 
+        // Vérifier le nom
         if (string.IsNullOrWhiteSpace(nom))
         {
             await DisplayAlert(
@@ -34,6 +37,7 @@ public partial class ReservationPage : ContentPage
             return;
         }
 
+        // Vérifier la salle
         if (SallePicker.SelectedIndex == -1)
         {
             await DisplayAlert(
@@ -44,6 +48,7 @@ public partial class ReservationPage : ContentPage
             return;
         }
 
+        // Vérifier l'horaire
         if (HorairePicker.SelectedIndex == -1)
         {
             await DisplayAlert(
@@ -56,10 +61,39 @@ public partial class ReservationPage : ContentPage
 
         string salle = SallePicker.SelectedItem?.ToString() ?? "";
         string horaire = HorairePicker.SelectedItem?.ToString() ?? "";
+        DateTime date = DateReservation.Date;
 
+        // Créer la nouvelle réservation
+        Reservation nouvelleReservation = new Reservation
+        {
+            NomUtilisateur = nom,
+            NomSalle = salle,
+            Date = date,
+            PlageHoraire = horaire
+        };
+
+        // Ajouter la réservation en vérifiant les doublons
+        bool ajoutReussi =
+            ReservationService.AjouterReservation(nouvelleReservation);
+
+        // Si la salle est déjà réservée
+        if (!ajoutReussi)
+        {
+            await DisplayAlert(
+                "Salle indisponible",
+                $"La {salle} est déjà réservée le {date:dd/MM/yyyy} de {horaire}.",
+                "OK");
+
+            return;
+        }
+
+        // Afficher la confirmation
         await DisplayAlert(
             "Réservation confirmée",
-            $"Nom : {nom}\nSalle : {salle}\nDate : {DateReservation.Date:dd/MM/yyyy}\nPlage horaire : {horaire}",
+            $"Nom : {nom}\n" +
+            $"Salle : {salle}\n" +
+            $"Date : {date:dd/MM/yyyy}\n" +
+            $"Plage horaire : {horaire}",
             "OK");
     }
 }
