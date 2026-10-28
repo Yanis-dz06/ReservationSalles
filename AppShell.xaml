@@ -4,21 +4,20 @@
     x:Class="ReservationSalles.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ReservationSalles"
-    xmlns:pages="clr-namespace:ReservationSalles.Pages"
+    xmlns:views="clr-namespace:ReservationSalles.Views"
     Shell.FlyoutBehavior="Flyout"
     Title="ReservationSalles">
 
     <!-- Tableau de bord -->
     <ShellContent
         Title="Tableau de bord"
-        ContentTemplate="{DataTemplate pages:DashboardPage}"
+        ContentTemplate="{DataTemplate views:DashboardPage}"
         Route="DashboardPage" />
 
     <!-- Mes réservations -->
     <ShellContent
         Title="Mes réservations"
-        ContentTemplate="{DataTemplate pages:ReservationsPage}"
+        ContentTemplate="{DataTemplate views:ReservationsPage}"
         Route="ReservationsPage" />
 
 </Shell>

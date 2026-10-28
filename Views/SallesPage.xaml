@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   x:Class="ReservationSalles.Views.SallesPage"
+    Title="Salles"
+    BackgroundColor="White">
+
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="15">
+
+        <!-- Titre -->
+        <Label
+            Text="Salles disponibles"
+            Style="{StaticResource TitrePage}"/>
+
+        <!-- Liste des salles -->
+        <CollectionView
+            ItemsSource="{Binding Salles}">
+
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <!-- Carte de la salle -->
+                    <Border
+                        Style="{StaticResource CarteSalle}">
+
+                        <Grid
+                            ColumnDefinitions="80,*,Auto"
+                            ColumnSpacing="15">
+
+                            <!-- Image -->
+                            <Image
+                                Source="dotnet_bot.png"
+                                HeightRequest="60"
+                                WidthRequest="60"
+                                Aspect="AspectFit"/>
+
+                            <!-- Informations -->
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                Spacing="5">
+
+                                <!-- Nom -->
+                                <Label
+                                    Text="{Binding Nom}"
+                                    Style="{StaticResource TexteCarte}"/>
+
+                                <!-- Capacité -->
+                                <Label
+                                    Text="{Binding Capacite, StringFormat='Capacité : {0} personnes'}"
+                                    Style="{StaticResource TexteSecondaire}"/>
+
+                                <!-- Localisation -->
+                                <Label
+                                    Text="{Binding Localisation, StringFormat='Localisation : {0}'}"
+                                    Style="{StaticResource TexteSecondaire}"/>
+
+                                <!-- Disponibilité -->
+                                <Label
+                                    Text="{Binding Statut, StringFormat='Disponibilité : {0}'}"
+                                    FontSize="15"
+                                    FontAttributes="Bold"
+                                    TextColor="{Binding StatutCouleur}"/>
+
+                            </VerticalStackLayout>
+
+                            <!-- Bouton Voir -->
+                            <Button
+                                Grid.Column="2"
+                                Text="Voir"
+                                Style="{StaticResource BoutonPrincipal}"
+                                VerticalOptions="Center"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.VoirSalleCommand}"
+                                CommandParameter="{Binding}"/>
+
+                        </Grid>
+
+                    </Border>
+
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>

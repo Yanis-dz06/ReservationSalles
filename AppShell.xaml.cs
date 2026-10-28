@@ -8,17 +8,22 @@ public partial class AppShell : Shell
 
         // Route vers la liste des salles
         Routing.RegisterRoute(
-            nameof(Pages.SallesPage),
-            typeof(Pages.SallesPage));
+            nameof(Views.SallesPage),
+            typeof(Views.SallesPage));
 
         // Route vers le détail d'une salle
         Routing.RegisterRoute(
-            nameof(Pages.SalleDetailPage),
-            typeof(Pages.SalleDetailPage));
+            nameof(Views.SalleDetailPage),
+            typeof(Views.SalleDetailPage));
 
         // Route vers la page de réservation
         Routing.RegisterRoute(
-            nameof(Pages.ReservationPage),
-            typeof(Pages.ReservationPage));
+            nameof(Views.ReservationPage),
+            typeof(Views.ReservationPage));
+
+        // Route vers mes réservations
+        Routing.RegisterRoute(
+            nameof(Views.ReservationsPage),
+            typeof(Views.ReservationsPage));
     }
 }

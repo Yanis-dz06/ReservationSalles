@@ -121,3 +121,173 @@ Validation
 Confirmation
        ↓
 Mes réservations
+## Technologies utilisées
+
+- C#
+- .NET MAUI
+- XAML
+- Visual Studio 2022
+- Git
+- GitHub
+
+## Structure du projet
+
+```text
+ReservationSalles
+│
+├── Images
+│   ├── dashboard.png
+│   ├── salles.png
+│   ├── salle-detail.png
+│   ├── reservation.png
+│   ├── reservation-confirmation.png
+│   └── reservations.png
+│
+├── Models
+│   ├── Salle.cs
+│   ├── Reservation.cs
+│   └── ReservationService.cs
+│
+├── Pages
+│   ├── DashboardPage.xaml
+│   ├── DashboardPage.xaml.cs
+│   ├── SallesPage.xaml
+│   ├── SallesPage.xaml.cs
+│   ├── SalleDetailPage.xaml
+│   ├── SalleDetailPage.xaml.cs
+│   ├── ReservationPage.xaml
+│   ├── ReservationPage.xaml.cs
+│   ├── ReservationsPage.xaml
+│   └── ReservationsPage.xaml.cs
+│
+├── Platforms
+│
+├── Resources
+│   └── Styles
+│
+├── App.xaml
+├── App.xaml.cs
+├── AppShell.xaml
+├── AppShell.xaml.cs
+└── README.md
+ReservationSalles
+│
+├── Images
+│   ├── dashboard.png
+│   ├── salles.png
+│   ├── salle-detail.png
+│   ├── reservation.png
+│   ├── reservation-confirmation.png
+│   └── reservations.png
+│
+├── Models
+│   ├── Salle.cs
+│   ├── Reservation.cs
+│   └── ReservationService.cs
+│
+├── Pages
+│   ├── DashboardPage.xaml
+│   ├── DashboardPage.xaml.cs
+│   ├── SallesPage.xaml
+│   ├── SallesPage.xaml.cs
+│   ├── SalleDetailPage.xaml
+│   ├── SalleDetailPage.xaml.cs
+│   ├── ReservationPage.xaml
+│   ├── ReservationPage.xaml.cs
+│   ├── ReservationsPage.xaml
+│   └── ReservationsPage.xaml.cs
+│
+├── Platforms
+│
+├── Resources
+│   └── Styles
+│
+├── App.xaml
+├── App.xaml.cs
+├── AppShell.xaml
+├── AppShell.xaml.cs
+└── README.md
+## Navigation entre les pages
+
+La navigation de l'application utilise `AppShell` et les routes .NET MAUI.
+
+Les principales pages sont :
+
+- `DashboardPage`
+- `SallesPage`
+- `SalleDetailPage`
+- `ReservationPage`
+- `ReservationsPage`
+
+La salle sélectionnée est transmise de `SalleDetailPage` vers `ReservationPage`.
+
+Les réservations effectuées sont conservées dans `ReservationService` pendant l'exécution de l'application.
+
+## Captures d'écran
+
+### Tableau de bord
+
+![Tableau de bord](Images/dashboard.png)
+
+### Liste des salles
+
+![Liste des salles](Images/salles.png)
+
+### Détail d'une salle
+
+![Détail d'une salle](Images/salle-detail.png)
+
+### Formulaire de réservation
+
+![Formulaire de réservation](Images/reservation.png)
+
+### Confirmation de réservation
+
+![Confirmation de réservation](Images/reservation-confirmation.png)
+
+### Mes réservations
+
+![Mes réservations](Images/reservations.png)
+
+## Guide d'exécution
+
+1. Ouvrir le projet `ReservationSalles` dans Visual Studio 2022.
+2. Vérifier que .NET MAUI est installé.
+3. Ouvrir la solution du projet.
+4. Sélectionner **Windows Machine** comme cible d'exécution.
+5. Appuyer sur **F5** pour lancer l'application.
+6. Le tableau de bord s'affiche au démarrage.
+7. Cliquer sur **Voir les salles**.
+8. Sélectionner une salle et cliquer sur **Voir**.
+9. Consulter les détails de la salle.
+10. Cliquer sur **Réserver**.
+11. Entrer le nom de l'utilisateur.
+12. Choisir une salle.
+13. Choisir une date.
+14. Choisir une plage horaire.
+15. Cliquer sur **Réserver**.
+16. Une confirmation de réservation s'affiche.
+17. Ouvrir le menu **☰**.
+18. Cliquer sur **Mes réservations** pour consulter les réservations effectuées.
+
+## Gestion des réservations
+
+Les réservations sont conservées dans une liste en mémoire à l'aide de `ReservationService`.
+
+L'application vérifie qu'une même salle ne possède pas déjà une réservation pour la même date et la même plage horaire.
+
+Si une réservation identique existe déjà, l'application affiche un message indiquant que la salle est indisponible.
+
+Les réservations ne sont pas sauvegardées de façon permanente et sont perdues lorsque l'application est arrêtée.
+
+## Données
+
+Les salles utilisées dans l'application sont des données de démonstration.
+
+Les réservations sont simulées et conservées temporairement en mémoire.
+
+Aucune base de données n'est utilisée dans cette version du projet.
+
+## Projet
+
+Projet réalisé dans le cadre du cours de programmation avec .NET MAUI.

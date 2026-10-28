@@ -1,15 +1,15 @@
-using ReservationSalles.Models;
+ï»¿using ReservationSalles.Models;
 
-namespace ReservationSalles.Pages;
+namespace ReservationSalles.ViewModels;
 
-public partial class SallesPage : ContentPage
+public class SallesViewModel
 {
-    public List<Salle> Salles { get; set; }
+    public List<Salle> Salles { get; }
 
-    public SallesPage()
+    public Command<Salle> VoirSalleCommand { get; }
+
+    public SallesViewModel()
     {
-        InitializeComponent();
-
         Salles = new List<Salle>
         {
             new Salle
@@ -48,9 +48,9 @@ public partial class SallesPage : ContentPage
                 Equipements = new List<string>
                 {
                     "Projecteur",
-                    "Écran",
+                    "Ã‰cran",
                     "Wi-Fi",
-                    "Système audio"
+                    "SystÃ¨me audio"
                 }
             },
 
@@ -64,26 +64,23 @@ public partial class SallesPage : ContentPage
                 {
                     "Projecteur",
                     "Tableau blanc",
-                    "Visioconférence",
+                    "VisioconfÃ©rence",
                     "Wi-Fi"
                 }
             }
         };
 
-        BindingContext = this;
-    }
-
-    private async void OnVoirClicked(object sender, EventArgs e)
-    {
-        if (sender is Button button &&
-            button.BindingContext is Salle salle)
+        VoirSalleCommand = new Command<Salle>(async salle =>
         {
+            if (salle == null)
+                return;
+
             await Shell.Current.GoToAsync(
-                nameof(SalleDetailPage),
+                nameof(Views.SalleDetailPage),
                 new Dictionary<string, object>
                 {
                     ["Salle"] = salle
                 });
-        }
+        });
     }
 }

@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ReservationSalles.Models;
 
-public static class ReservationService
+public class ReservationService
 {
-    public static List<Reservation> Reservations { get; } = new();
+    public static ReservationService Partage { get; } = new();
 
-    public static bool AjouterReservation(Reservation reservation)
+    public ObservableCollection<Reservation> Reservations { get; } = new();
+
+    public Reservation? Selectionnee { get; set; }
+
+    public bool AjouterReservation(Reservation reservation)
     {
         bool existeDeja = Reservations.Any(r =>
             r.NomSalle == reservation.NomSalle &&
@@ -20,7 +24,7 @@ public static class ReservationService
             return false;
         }
 
-        Reservations.Add(reservation);
+        Reservations.Insert(0, reservation);
         return true;
     }
 }
