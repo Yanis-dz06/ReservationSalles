@@ -4,11 +4,19 @@ Application .NET MAUI permettant de consulter les salles disponibles et de gére
 
 ## Présentation du projet
 
-ReservationSalles est une application développée avec .NET MAUI dans le cadre du cours de programmation.
+**ReservationSalles** est une application développée avec **.NET MAUI, C#, XAML et Visual Studio 2022** dans le cadre du cours de programmation.
 
-L'application permet de consulter les salles, d'afficher leurs informations détaillées, de faire une réservation et de consulter les réservations effectuées.
+L'application permet de :
 
-Les données du projet sont des données de démonstration. Les réservations sont conservées en mémoire pendant l'exécution de l'application et ne sont pas enregistrées dans une base de données.
+- consulter les salles disponibles ;
+- afficher les informations détaillées d'une salle ;
+- effectuer une réservation ;
+- vérifier la disponibilité d'une salle ;
+- consulter les réservations effectuées.
+
+Les données utilisées dans le projet sont des données de démonstration. Les réservations sont conservées temporairement en mémoire pendant l'exécution de l'application.
+
+Aucune base de données n'est utilisée dans cette version du projet.
 
 ## Fonctionnalités
 
@@ -16,20 +24,20 @@ Les données du projet sont des données de démonstration. Les réservations so
 
 Le tableau de bord permet de :
 
-- Afficher le nombre de salles disponibles
-- Afficher le nombre de réservations simulées
-- Accéder à la liste des salles
+- afficher le nombre de salles disponibles ;
+- afficher le nombre de réservations simulées ;
+- accéder à la liste des salles.
 
 ### Liste des salles
 
 La liste affiche les informations principales de chaque salle :
 
-- Nom de la salle
-- Capacité
-- Localisation
-- Disponibilité
-- Équipements
-- Bouton pour consulter les détails
+- nom de la salle ;
+- capacité ;
+- localisation ;
+- disponibilité ;
+- équipements ;
+- bouton permettant de consulter les détails.
 
 Les salles utilisées dans l'application sont :
 
@@ -42,11 +50,11 @@ Les salles utilisées dans l'application sont :
 
 La page de détail permet de consulter :
 
-- Le nom de la salle
-- La capacité
-- La localisation
-- La disponibilité
-- Les équipements disponibles
+- le nom de la salle ;
+- la capacité ;
+- la localisation ;
+- la disponibilité ;
+- les équipements disponibles.
 
 Un bouton **Réserver** permet d'accéder au formulaire de réservation.
 
@@ -54,12 +62,12 @@ Un bouton **Réserver** permet d'accéder au formulaire de réservation.
 
 Le formulaire de réservation permet de saisir :
 
-- Le nom de l'utilisateur
-- La salle
-- La date
-- La plage horaire
+- le nom de l'utilisateur ;
+- la salle ;
+- la date ;
+- la plage horaire.
 
-Lorsque l'utilisateur accède au formulaire depuis la page de détail, la salle sélectionnée est automatiquement transmise au formulaire.
+Lorsque l'utilisateur accède au formulaire depuis la page de détail, la salle sélectionnée est transmise à la page de réservation.
 
 ### Validation
 
@@ -67,22 +75,22 @@ Le formulaire vérifie les informations nécessaires avant de confirmer la rése
 
 Les informations vérifiées sont :
 
-- Le nom de l'utilisateur
-- La salle sélectionnée
-- La plage horaire
+- le nom de l'utilisateur ;
+- la salle sélectionnée ;
+- la plage horaire.
 
 Une alerte est affichée lorsqu'une information obligatoire est manquante.
 
 Après une saisie valide, une confirmation affiche :
 
-- Le nom de l'utilisateur
-- La salle
-- La date
-- La plage horaire
+- le nom de l'utilisateur ;
+- la salle ;
+- la date ;
+- la plage horaire.
 
 ### Vérification des disponibilités
 
-L'application vérifie si la salle est déjà réservée pour la même date et la même plage horaire.
+L'application vérifie si une salle est déjà réservée pour la même date et la même plage horaire.
 
 Une même salle ne peut donc pas être réservée deux fois au même moment.
 
@@ -94,16 +102,85 @@ La page **Mes réservations** permet d'afficher les réservations effectuées pe
 
 Pour chaque réservation, l'application affiche :
 
-- Le nom de la salle
-- Le nom de l'utilisateur
-- La date
-- La plage horaire
+- le nom de la salle ;
+- le nom de l'utilisateur ;
+- la date ;
+- la plage horaire.
 
-La page est accessible directement depuis le menu de navigation.
+La page est accessible depuis le menu de navigation.
+
+## Architecture MVVM
+
+L'application utilise l'architecture **MVVM (Model-View-ViewModel)** selon les notions étudiées dans le cours.
+
+Cette architecture permet de séparer les données, l'interface et la logique de présentation.
+
+### Models
+
+Le dossier `Models` contient les classes qui représentent les données et la gestion des réservations :
+
+- `Salle.cs` : représente une salle.
+- `Reservation.cs` : représente une réservation.
+- `ReservationService.cs` : gère les réservations et la vérification des doublons.
+
+### Views
+
+Le dossier `Views` contient les interfaces de l'application réalisées avec XAML :
+
+- `DashboardPage` : tableau de bord.
+- `SallesPage` : liste des salles.
+- `SalleDetailPage` : détails d'une salle.
+- `ReservationPage` : formulaire de réservation.
+- `ReservationsPage` : liste des réservations.
+
+### ViewModels
+
+Le dossier `ViewModels` contient la logique de présentation :
+
+- `DashboardViewModel.cs`
+- `SallesViewModel.cs`
+- `SalleDetailViewModel.cs`
+- `ReservationViewModel.cs`
+- `ReservationsViewModel.cs`
+
+### Binding
+
+Les propriétés des ViewModels sont reliées aux éléments de l'interface avec les `Binding`.
+
+Par exemple :
+
+```xml
+<CollectionView ItemsSource="{Binding Reservations}"
+                SelectionMode="None">
+```
+
+Le `BindingContext` permet de connecter une View à son ViewModel.
+
+Exemple :
+
+```csharp
+BindingContext = new ReservationViewModel();
+```
+
+### Command
+
+Les actions des boutons peuvent être gérées avec des `Command` dans les ViewModels.
+
+Par exemple :
+
+```xml
+<Button
+    Text="Réserver"
+    Command="{Binding ReserverCommand}" />
+```
+
+Cette organisation permet de séparer la logique de présentation du code de l'interface.
 
 ## Navigation
 
-Le parcours principal de l'application est :
+La navigation de l'application utilise **AppShell** et les routes .NET MAUI.
+
+Le parcours principal est :
 
 ```text
 Tableau de bord
@@ -121,95 +198,7 @@ Validation
 Confirmation
        ↓
 Mes réservations
-## Technologies utilisées
-
-- C#
-- .NET MAUI
-- XAML
-- Visual Studio 2022
-- Git
-- GitHub
-
-## Structure du projet
-
-```text
-ReservationSalles
-│
-├── Images
-│   ├── dashboard.png
-│   ├── salles.png
-│   ├── salle-detail.png
-│   ├── reservation.png
-│   ├── reservation-confirmation.png
-│   └── reservations.png
-│
-├── Models
-│   ├── Salle.cs
-│   ├── Reservation.cs
-│   └── ReservationService.cs
-│
-├── Pages
-│   ├── DashboardPage.xaml
-│   ├── DashboardPage.xaml.cs
-│   ├── SallesPage.xaml
-│   ├── SallesPage.xaml.cs
-│   ├── SalleDetailPage.xaml
-│   ├── SalleDetailPage.xaml.cs
-│   ├── ReservationPage.xaml
-│   ├── ReservationPage.xaml.cs
-│   ├── ReservationsPage.xaml
-│   └── ReservationsPage.xaml.cs
-│
-├── Platforms
-│
-├── Resources
-│   └── Styles
-│
-├── App.xaml
-├── App.xaml.cs
-├── AppShell.xaml
-├── AppShell.xaml.cs
-└── README.md
-ReservationSalles
-│
-├── Images
-│   ├── dashboard.png
-│   ├── salles.png
-│   ├── salle-detail.png
-│   ├── reservation.png
-│   ├── reservation-confirmation.png
-│   └── reservations.png
-│
-├── Models
-│   ├── Salle.cs
-│   ├── Reservation.cs
-│   └── ReservationService.cs
-│
-├── Pages
-│   ├── DashboardPage.xaml
-│   ├── DashboardPage.xaml.cs
-│   ├── SallesPage.xaml
-│   ├── SallesPage.xaml.cs
-│   ├── SalleDetailPage.xaml
-│   ├── SalleDetailPage.xaml.cs
-│   ├── ReservationPage.xaml
-│   ├── ReservationPage.xaml.cs
-│   ├── ReservationsPage.xaml
-│   └── ReservationsPage.xaml.cs
-│
-├── Platforms
-│
-├── Resources
-│   └── Styles
-│
-├── App.xaml
-├── App.xaml.cs
-├── AppShell.xaml
-├── AppShell.xaml.cs
-└── README.md
-## Navigation entre les pages
-
-La navigation de l'application utilise `AppShell` et les routes .NET MAUI.
+```
 
 Les principales pages sont :
 
@@ -221,7 +210,82 @@ Les principales pages sont :
 
 La salle sélectionnée est transmise de `SalleDetailPage` vers `ReservationPage`.
 
-Les réservations effectuées sont conservées dans `ReservationService` pendant l'exécution de l'application.
+## Structure du projet
+
+```text
+ReservationSalles
+│
+├── Images
+│
+├── Models
+│   ├── Salle.cs
+│   ├── Reservation.cs
+│   └── ReservationService.cs
+│
+├── ViewModels
+│   ├── DashboardViewModel.cs
+│   ├── SallesViewModel.cs
+│   ├── SalleDetailViewModel.cs
+│   ├── ReservationViewModel.cs
+│   └── ReservationsViewModel.cs
+│
+├── Views
+│   ├── DashboardPage.xaml
+│   ├── DashboardPage.xaml.cs
+│   ├── SallesPage.xaml
+│   ├── SallesPage.xaml.cs
+│   ├── SalleDetailPage.xaml
+│   ├── SalleDetailPage.xaml.cs
+│   ├── ReservationPage.xaml
+│   ├── ReservationPage.xaml.cs
+│   ├── ReservationsPage.xaml
+│   └── ReservationsPage.xaml.cs
+│
+├── Platforms
+│
+├── Resources
+│   └── Styles
+│
+├── App.xaml
+├── App.xaml.cs
+├── AppShell.xaml
+├── AppShell.xaml.cs
+├── MainPage.xaml
+├── MauiProgram.cs
+└── README.md
+```
+
+## Technologies utilisées
+
+- C#
+- .NET MAUI
+- XAML
+- Visual Studio 2022
+- Git
+- GitHub
+
+## Gestion des réservations
+
+Les réservations sont conservées temporairement dans une liste en mémoire à l'aide de `ReservationService`.
+
+L'application vérifie qu'une même salle ne possède pas déjà une réservation pour la même date et la même plage horaire.
+
+Si une réservation identique existe déjà, l'application affiche un message indiquant que la salle est indisponible.
+
+Les réservations ne sont pas sauvegardées de façon permanente et sont perdues lorsque l'application est arrêtée.
+
+## Données
+
+Les salles utilisées dans l'application sont des données de démonstration :
+
+- Salle 101
+- Salle 102
+- Salle 201
+- Salle 202
+
+Les réservations sont simulées et conservées temporairement en mémoire.
+
+Aucune base de données n'est utilisée dans cette version du projet.
 
 ## Captures d'écran
 
@@ -270,24 +334,6 @@ Les réservations effectuées sont conservées dans `ReservationService` pendant
 17. Ouvrir le menu **☰**.
 18. Cliquer sur **Mes réservations** pour consulter les réservations effectuées.
 
-## Gestion des réservations
-
-Les réservations sont conservées dans une liste en mémoire à l'aide de `ReservationService`.
-
-L'application vérifie qu'une même salle ne possède pas déjà une réservation pour la même date et la même plage horaire.
-
-Si une réservation identique existe déjà, l'application affiche un message indiquant que la salle est indisponible.
-
-Les réservations ne sont pas sauvegardées de façon permanente et sont perdues lorsque l'application est arrêtée.
-
-## Données
-
-Les salles utilisées dans l'application sont des données de démonstration.
-
-Les réservations sont simulées et conservées temporairement en mémoire.
-
-Aucune base de données n'est utilisée dans cette version du projet.
-
 ## Projet
 
-Projet réalisé dans le cadre du cours de programmation avec .NET MAUI.
+Projet réalisé dans le cadre du cours de programmation avec **.NET MAUI**.
